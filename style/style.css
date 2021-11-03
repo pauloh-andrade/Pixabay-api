@@ -4,6 +4,8 @@
     box-sizing: border-box;
     outline: none;
     border: none;
+    font-family: Open Sans,Arial,sans-serif;
+     
 }
 
 .row{
@@ -17,47 +19,76 @@
         align-items: center;
         flex-direction: column;
 }
+p{
+    font-size: 0.9rem;
+     color: #7d7d7d;
+}
+.txt-padrao{
+    color:#BBBBBB;
+    font-weight: 400;
+}
+body{
+     overflow-x: hidden;
+}
 /* ******************************************* */
 header{
     width: 100%;
     height: 60px;
-    padding: 20px;
+    padding: 10px;
     background: white;
     box-shadow: 0 0 60px rgb(0 0 0 / 9%);
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 40px;
     position: relative;
     /* background-color: aqua; */
 }
-header img{
-    width: 40px;
+header div .logo{
+    width: 50px;
+    margin-right: 40px;
 }
-header .container-pesquisa{
+
+.centralizar{
+     width: 100%;
+    max-width: 1900px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.container-pesquisa{
     width: 500px;
-    height: 35px;
+    height: 36px;
     background-color: #f7f7f7;
     justify-content: flex-start;
     border-radius: 3px;
+    
    
 }
 .container-pesquisa img{
     width: 22px;
-    margin-left: 5px;
+    margin-left: 7px;
     filter: brightness(60%);
 }
 .container-pesquisa input{
     width: 370px;
     height: inherit;
-    background-color: transparent;
+    background-color: inherit;
     padding-left: 15px;
+    font-size: 0.9rem;
+    margin-left: -5px;
+    margin-right: 7px;
+    color: #454545;
+}
+.container-pesquisa input::placeholder{
+    color: #bfbfbf;
 }
 .container-pesquisa div{
     width: 90px;
-    height: 25px;
+    height: 29px;
     margin: auto;
     background-color: white;
+     
 }
 /* ********************************************* */
 #container-categorias{
@@ -67,6 +98,13 @@ header .container-pesquisa{
     display: block;
 }
 /* ********************************************* */
+.status{
+    width: 100vw;
+    height: 40px;
+    padding:15px;
+    padding-left: 25px;
+/*    background-color: aqua;*/
+}
 #container-galeria{
     width: 100%;
     max-width: 1900px;
@@ -75,24 +113,68 @@ header .container-pesquisa{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
     padding: 20px;
 }
 #container-galeria > div{
     flex-grow:1;
-    height: 230px;
+    height: 270px;
     display: flex;
     align-items: flex-end;
     position: relative;
+    cursor: pointer;
+} 
+#container-galeria > div:hover > .options{
+    opacity: 1;
+    display: flex;
+    height: 45px;
+    transition: all .4s;
 }
+#container-galeria > div:hover > .img-perfil,#container-galeria > div:hover > .img-perfil img{
+    opacity: 1;
+    transition: all .6s;
+}
+
 .options{
     width: 100%;
-    height: 50px;
-    background-color: aqua;
+    height: 0px;
+    background-image: linear-gradient(to top, #0009, #0004, transparent);
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 20px;
+    opacity: 0;
+}
+.info{
+    margin-left: 10px;
+    color: white;
+    font-size: 0.9rem;
+}
+.info img{
+    width: 16px;
 }
 .card-image{
     width: 100%;
     height: 100%;
-   
+}
+
+.img-perfil{
+    width: 70px;
+    height: 70px;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    position: absolute;
+    background: linear-gradient(215deg,  #000, #0002, transparent,transparent 100%);
+}
+.img-perfil img{
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 25px;
+    box-shadow: 0 0 15px #000;
+    opacity: 0;
 }

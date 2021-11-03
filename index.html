@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/style.css">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/logo.PNG">
+    <link rel="icon" type="image/png" sizes="15x15" href="img/pixabay-icon.png">
     <script src="js/scriptApi.js" defer></script>
-    <title>Document</title>
+    <title>Pixabay API</title>
 </head>
 <body class="column">
     <header>
-        <img src="img/logo.PNG">
-        <div class="container-pesquisa row">
-            <img src="img/search-240.png">
-            <input id="pesquisa" type="text">
-            <div class="row"> Imagens</div>
+        <div class="centralizar">
+            <img class="logo"src="img/logo.PNG">
+            <div class="container-pesquisa row">
+                <img src="img/search-240.png">
+                <input id="pesquisa" type="text" placeholder="Buscar">
+                <div class="row"><p>Imagens<p></div>
+            </div>
         </div>
     </header>
     <section id="container-categorias">
+
         <div class="popular">
 
         </div>
@@ -25,9 +28,13 @@
 
         </div>
     </section>
-    <main>
+    <main class="column">
+        <div class="centralizar">
+            <div class="status">
+            </div>
+        </div>
          <div id="container-galeria">
-             ds
+             
          </div>   
     </main>
 </body>
