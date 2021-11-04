@@ -83,12 +83,23 @@ header div .logo{
 .container-pesquisa input::placeholder{
     color: #bfbfbf;
 }
-.container-pesquisa div{
+.container-pesquisa .categorias{
     width: 90px;
     height: 29px;
     margin: auto;
     background-color: white;
      
+}
+select{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.categorias{
+    font-size: 0.9rem;
+    color: #7d7d7d;
+    padding-left: 10px;
+/*    text-align: center;*/
 }
 /* ********************************************* */
 #container-categorias{

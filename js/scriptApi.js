@@ -12,12 +12,15 @@ const carregarStatus = (status,pesquisa) =>{
     newStatus.innerHTML = `${status.totalHits} fotos grátis para ${pesquisa}`;
     container.appendChild(newStatus);
 }
+
 const pesquisarImagens = async(evento) =>{
     if(evento.key == "Enter"){
+        //recebendo value do select
+        const tipoImagem = document.querySelector(".categorias").value;
         //recebendo value do input
         const pesquisa = evento.target.value;
         //url json pixabay
-        const url = `https://pixabay.com/api/?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&image_type=photo&pretty=true`;
+        const url = `https://pixabay.com/api/?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&image_type=${tipoImagem}`;
         //fazendo requisição
         const response = await fetch(url);
         //Extraindo json
@@ -60,3 +63,4 @@ const criarItem = item =>{
 const carregarGaleria = imagens => imagens.forEach(criarItem);
 
 document.querySelector("#pesquisa").addEventListener("keypress", pesquisarImagens);
+document.querySelector(".categorias").addEventListener("slected", pesquisarImagens);
