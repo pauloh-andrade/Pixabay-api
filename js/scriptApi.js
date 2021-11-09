@@ -1,5 +1,5 @@
-"use stritic";
-
+"use strict";
+let contador = document.querySelector("#pagina");
 //function para limpar elementos ao pesquisar
 const limparElementos = elemento =>{
     while(elemento.firstChild){
@@ -11,7 +11,7 @@ const carregarStatus = (status,pesquisa,tipoBusca) =>{
     const container = document.querySelector(".status");
     const newStatus = document.createElement("p");
     newStatus.classList = ".txt-padrao";
-    newStatus.innerHTML = `${status.totalHits} ${tipoBusca} grátis para ${pesquisa}`;
+    newStatus.innerHTML = `${status.totalHits} ${tipoBusca} grátis de ${pesquisa}`;
     container.appendChild(newStatus);
 }
 //function para retornar infromações sobre a busca(tipo, categoria, e pasta)
@@ -35,15 +35,15 @@ const tipoBusca = ()=>{
     const arrayBusca = [urlBusca,pastaVideo,tipoBusca];
     return arrayBusca;
 }
+//function para atualizar pagina
+
 //function para pesquisar imagens 
-const pesquisarImagens = async(evento) =>{
-    if(evento.key == "Enter"){
+const pesquisarImagens = async(pesquisa) =>{
+        let pagina = contador.value;
         //recebendo tipo de busca (video ou image) e dirretório video
         const busca = tipoBusca();
-        //recebendo value do input
-        const pesquisa = evento.target.value;
         //url json pixabay
-        const url = `https://pixabay.com/api/${busca[1]}?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&lang=pt&${busca[0]}`;
+        const url = `https://pixabay.com/api/${busca[1]}?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&lang=pt&${busca[0]}&per_page=20&page=${pagina}`;
         //fazendo requisição
         const response = await fetch(url);
         //Extraindo json
@@ -54,14 +54,55 @@ const pesquisarImagens = async(evento) =>{
 
         carregarGaleria(imagens.hits);
         carregarStatus(imagens,pesquisa,busca[2]);
+
+}
+//function para avançar uma pagina
+const proximaPagina = () =>{
+    if(contador.value <10){
+        contador.value = parseInt(contador.value) + 1;
+        const pesquisa = document.querySelector("#pesquisa").value;
+        pesquisarImagens(pesquisa);
     }
+}
+//function para voltar uma pagina
+const paginaAnterior = () =>{
+    if(contador.value >1){
+        contador.value = parseInt(contador.value) - 1;
+        const pesquisa = document.querySelector("#pesquisa").value;
+        pesquisarImagens(pesquisa);
+    }
+}
+//function para receber pesquisa
+const pesquisa =(evento)=>{
+    if(evento.key == "Enter"){
+        contador.value = 1;
+        //recebendo value do input
+        const pesquisa = evento.target.value;
+        pesquisarImagens(pesquisa);
+        
+    }
+}
+//function verificar icon-user
+const verificarUser = (item) =>{
+    if(item.userImageURL == ''){
+        item.userImageURL = 'img/user.png'
+        return item.userImageURL
+    }
+    else{
+        return item.userImageURL;
+    }
+    
 }
 //function para criar cards de imagens
 const criarItem = item =>{
+    //criando container
     const container = document.querySelector("#container-galeria");
     const newCard =document.createElement("div");
     //newCard.href = `${item.pageURL}`;
     const tags = item.tags.replace(/,+/g, '');
+    //chamando função para verificar foto de usuario
+    item.userImageURL = verificarUser(item);
+    //criando card
     newCard.innerHTML = `
                 <a class="img-perfil" href="https://pixabay.com/users/${item.user}-${item.user_id}/">
                     <img class="img-perfil" src="${item.userImageURL}">
@@ -78,11 +119,13 @@ const criarItem = item =>{
                 <img class="card-image" src="${item.webformatURL?item.webformatURL:'https://i.vimeocdn.com/video/'+ item.picture_id+'_640x360.jpg'} ">
                 </a>
             `;
+    //carregando card
     container.appendChild(newCard);
 }
-
-
 const carregarGaleria = imagens => imagens.forEach(criarItem);
 
-document.querySelector("#pesquisa").addEventListener("keypress", pesquisarImagens);
-document.querySelector(".categorias").addEventListener("slected", pesquisarImagens);
+document.querySelector("#pesquisa").addEventListener("keypress", pesquisa);
+document.querySelector("#proximo").addEventListener("click", proximaPagina);
+document.querySelector("#anterior").addEventListener("click", paginaAnterior);
+
+
