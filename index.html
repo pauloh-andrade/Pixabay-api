@@ -15,58 +15,76 @@
             <div class="container-pesquisa row">
                 <img src="img/search-240.png">
                 <input id="pesquisa" type="text" placeholder="Buscar">
-                <select class="row categorias">
-                    <option id="imagem" value="imagens.all">Imagens</option>
-                    <option id="imagem" value="imagens.photo">Fotos</option>
-                    <option id="imagem" value="imagens.vector">Imagens Vetoriais</option>
-                    <option id="imagem" value="imagens.illustration">Ilustrações</option>
-                    <option id="video" value="videos.all">Video</option>
-                </select>
+                <div class="categorias">
+                    <select class="row busca-avancada" id="categorias">
+                        <option id="imagem" value="imagens.all">Imagens</option>
+                        <option id="imagem" value="imagens.photo">Fotos</option>
+                        <option id="imagem" value="imagens.vector">Imagens Vetoriais</option>
+                        <option id="imagem" value="imagens.illustration">Ilustrações</option>
+                        <option id="video" value="videos.all">Video</option>
+                    </select>
+                     <img class ="seta icon-navegar" src="img/chevron-right.png">
+                </div>
             </div>
         </div>
     </header>
     <section id="container-categorias">
         <div class="centralizar">
             <div class="pesquisa-avancada">
-                <select class="row busca-avancada destaque">
-                    <option id="imagem" value="imagens.all">Popular</option>
-                    <option id="imagem" value="imagens.photo">Ultimo</option>
-                    <option id="imagem" value="imagens.vector">Emergente</option>
-                    <option id="imagem" value="imagens.illustration">Escolha do Editor</option>
-                </select>
-                <select class="row busca-avancada">
-                    <option id="imagem" value="imagens.all">Orientação</option>
-                    <option id="imagem" value="imagens.photo">Qualquer Orientação</option>
-                    <option id="imagem" value="imagens.vector">Vertical</option>
-                    <option id="imagem" value="imagens.illustration">Horizontal</option>
-                    <option id="video" value="videos.all">Video</option>
-                </select>
-                <select class="row busca-avancada">
-                    <option id="imagem" value="imagens.all">Categoria</option>
-                    <option id="imagem" value="imagens.photo">Animais</option>
-                    <option id="imagem" value="imagens.vector">Computador</option>
-                    <option id="imagem" value="imagens.illustration">Comida</option>
-                    <option id="imagem" value="imagens.illustration">Esportes</option>
-                    <option id="imagem" value="imagens.illustration">Edifícios</option>
-                    <option id="imagem" value="imagens.illustration">Musica</option>
-                </select>
-                <select class="row busca-avancada">
-                    <option id="imagem" value="imagens.all">Cor</option>
-                    <option id="imagem" value="imagens.photo">Transparente</option>
-                    <option id="imagem" value="imagens.vector">Preto e Branco</option>
-                    <option id="imagem" value="imagens.illustration">Vermelho</option>
-                    <option id="video" value="videos.all">Azul</option>
-                    <option id="video" value="videos.all">Amarelo</option>
-                    <option id="video" value="videos.all">Verde</option>
-                    <option id="video" value="videos.all">Turquesa</option>
-                    <option id="video" value="videos.all">Rosa</option>
-                    <option id="video" value="videos.all">Laranja</option>
-                    <option id="video" value="videos.all">White</option>
-                </select>
-
-                <input id="anterior" type="button" value="Anterior">
-                <input type="text" value="1" id="pagina">
-                <input id="proximo" type="button" value="Proxima">
+                <div class="busca-avancada destaque row">
+                    <select id="order" class="font-destaque">
+                        <option id="" value="popular">Popular</option>
+                        <option id="" value="latest">Recente</option>
+                    </select>
+                    <img class="seta" src="img/down-arrow.png">
+                </div>
+                <div class="busca-avancada row orientacao">
+                    <select id="orientation" class="row">
+                        <option id="" value="">Orientação</option>
+                        <option id="" value="all">Qualquer</option>
+                        <option id="" value="vertical">Vertical</option>
+                        <option id="" value="horizontal">Horizontal</option>
+                    </select>
+                    <img class="seta" src="img/down-arrow.png">
+                </div>
+                <div class="busca-avancada row">
+                    <select id="category" class="row">
+                        <option id="" value="">Categoria</option>
+                        <option id="" value="feelings">Animais</option>
+                        <option id="" value="computer">Computador</option>
+                        <option id="" value="food">Comida</option>
+                        <option id="" value="sports">Esportes</option>
+                        <option id="" value="buildings">Edifícios</option>
+                        <option id="" value="music">Musica</option>
+                    </select>
+                    <img class="seta" src="img/down-arrow.png">
+                </div>
+                <div class="busca-avancada row cor">
+                    <select id="color" class="row">
+                        <option value="">Paleta de Cores</option>
+                        <option value="transparent">Transparente</option>
+                        <option value="grayscale">Preto e Branco</option>
+                        <option value="red">Vermelho</option>
+                        <option value="blue">Azul</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="green">Verde</option>
+                        <option value="turquoise">Turquesa</option>
+                        <option value="pink">Rosa</option>
+                        <option value="orange">Laranja</option>
+                        <option value="white">Branco</option>
+                    </select>
+                    <img class="seta"src="img/down-arrow.png">  
+                </div>
+                <div class="paginacao">
+                    <button id="anterior" class="btn-navegar">
+                        <img class = "icon-navegar"src="img/chevron-left.png">
+                    </button>
+                    <input class="pagina"type="text" value="1" id="pagina">
+                    <div id="quantPaginas"><p></p></div>
+                    <button id="proximo" class="btn-navegar">
+                        <img class = "icon-navegar"src="img/chevron-right.png">
+                    </button>
+                </div>
             </div>
         </div>
     </section>

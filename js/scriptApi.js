@@ -14,10 +14,19 @@ const carregarStatus = (status,pesquisa,tipoBusca) =>{
     newStatus.innerHTML = `${status.totalHits} ${tipoBusca} grátis de ${pesquisa}`;
     container.appendChild(newStatus);
 }
+//variavel para carregar quantidade de paginas
+const carregarPaginas = (totalImagens, imagensPagina) =>{
+    const quantPagina = Math.ceil(totalImagens.totalHits/imagensPagina);
+    const container = document.querySelector("#quantPaginas");
+    const newQuant = document.createElement("p");
+    newQuant.innerHTML = `/${quantPagina}`;
+    container.appendChild(newQuant);
+    
+}
 //function para retornar infromações sobre a busca(tipo, categoria, e pasta)
 const tipoBusca = ()=>{
     //recebendo value do select
-    const busca = document.querySelector(".categorias").value;
+    const busca = document.querySelector("#categorias").value;
     //extraindo tipo de busca (image ou video)
     let tipoBusca = busca.substring(0,busca.lastIndexOf('.'));
     //extraindo categoria
@@ -39,11 +48,16 @@ const tipoBusca = ()=>{
 
 //function para pesquisar imagens 
 const pesquisarImagens = async(pesquisa) =>{
+        const ordernar = document.querySelector("#order").value;
+        const orientacao = document.querySelector("#orientation").value;
+        const categoria = document.querySelector("#category").value;
+        const cor = document.querySelector("#color").value;
+    
         let pagina = contador.value;
         //recebendo tipo de busca (video ou image) e dirretório video
         const busca = tipoBusca();
         //url json pixabay
-        const url = `https://pixabay.com/api/${busca[1]}?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&lang=pt&${busca[0]}&per_page=20&page=${pagina}`;
+        const url = `https://pixabay.com/api/${busca[1]}?key=23670717-85b5103b3d880933d4e67c566&q=${pesquisa}&lang=pt&${busca[0]}&per_page=20&page=${pagina}&order=${ordernar}&orientation=${orientacao}&category=${categoria}&colors=${cor}`;
         //fazendo requisição
         const response = await fetch(url);
         //Extraindo json
@@ -51,14 +65,17 @@ const pesquisarImagens = async(pesquisa) =>{
 
         limparElementos(document.querySelector("#container-galeria"));
         limparElementos(document.querySelector(".status"));
+        limparElementos(document.querySelector("#quantPaginas"));
 
         carregarGaleria(imagens.hits);
         carregarStatus(imagens,pesquisa,busca[2]);
+        carregarPaginas(imagens,20);
 
 }
 //function para avançar uma pagina
 const proximaPagina = () =>{
-    if(contador.value <10){
+    const quantPagina = parseInt(document.querySelector("#quantPaginas").textContent.replace('/',''));
+    if(contador.value < quantPagina){
         contador.value = parseInt(contador.value) + 1;
         const pesquisa = document.querySelector("#pesquisa").value;
         pesquisarImagens(pesquisa);
